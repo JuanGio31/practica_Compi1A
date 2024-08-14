@@ -1,8 +1,5 @@
 package com.mycompany.practica1compiladores;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
-import com.mycompany.practica1compiladores.view.VentanaPrincipal;
-
 /**
  *
  * @author giovanic
@@ -10,10 +7,12 @@ import com.mycompany.practica1compiladores.view.VentanaPrincipal;
 public class Practica1Compiladores {
 
     public static void main(String[] args) {
-        FlatDarculaLaf.setup();
+        System.out.println("\nHOLA MUNDO\n");
 
-        java.awt.EventQueue.invokeLater(() -> {
-            new VentanaPrincipal().setVisible(true);
-        });
+        // FlatDarculaLaf.setup();
+
+        // java.awt.EventQueue.invokeLater(() -> {
+        // new VentanaPrincipal().setVisible(true);
+        // });
     }
 }

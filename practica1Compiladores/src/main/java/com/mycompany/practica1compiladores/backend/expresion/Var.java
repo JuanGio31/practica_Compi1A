@@ -9,7 +9,7 @@ public class Var extends Instruccion {
 
     private Object valor;
 
-    public Var(Tipo tipo, int linea, int columna, Object valor) {
+    public Var(Tipo tipo, Object valor, int linea, int columna) {
         super(tipo, linea, columna);
         this.valor = valor;
     }

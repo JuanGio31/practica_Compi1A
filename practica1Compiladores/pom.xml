@@ -11,23 +11,24 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.practica1compiladores.Practica1Compiladores</exec.mainClass>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.4.1</version>
         </dependency>
-        <dependency>
+
+              <dependency>
             <groupId>de.jflex</groupId>
             <artifactId>jflex</artifactId>
-            <version>1.9.1</version>            
+            <version>1.9.1</version>
         </dependency>
         <dependency>
             <groupId>java_cup</groupId>
             <artifactId>java_cup</artifactId>
-            <version>0.9e</version>            
-        </dependency>      
+            <version>0.9e</version>
+        </dependency>
     </dependencies>
     
     <build>

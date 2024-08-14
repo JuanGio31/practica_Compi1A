@@ -6,4 +6,5 @@ package com.mycompany.practica1compiladores.backend.symbol;
 public enum TipoDeDato {
     ENTERO,
     DECIMAL,
+    ID
 }

@@ -1,0 +1,15 @@
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/symbol/TablaDeSimbolo.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/symbol/Simbolo.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/Practica1Compiladores.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/expresion/Var.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/utilities/GestionArchivos.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/analisis/Generador.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/instruccion/Instruccion.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/view/NumeroLinea.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/view/VentanaPrincipal.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/view/Tab.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/utilities/FilesControl.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/utilities/GestionTab.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/symbol/Arbol.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/symbol/TipoDeDato.java
+/home/giovanic/Documentos/Repositorios_GIT/practica_Compi1A/practica1Compiladores/src/main/java/com/mycompany/practica1compiladores/backend/symbol/Tipo.java
