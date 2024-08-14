@@ -14,7 +14,7 @@ import java.util.LinkedList;
 %line
 %column
 %full
-%debug
+//%debug
 //%ignorecase
 
 %init{
@@ -27,7 +27,7 @@ InputCharacter       = [^\r\n]
 CommentContent       = ( [^*] | \*+ [^/*] )*
 ComentarioMultiLine  = "/*" {CommentContent} "*"+ "/"
 EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
-WhiteSpace           = {LineTerminator} | [ \t\f]
+WhiteSpace           = [ \t\f]
 
 IDENTIFICADOR  = [A-Za-z_][A-Za-z0-9_]*
 ENTERO         = [0-9]+
@@ -91,6 +91,10 @@ COMENTARIO     =  {EndOfLineComment} | {ComentarioMultiLine}
         /*ANIMACION*/
         "linea"     {return symbol(ParserSym.LINEA, yytext());   }
         "curva"     {return symbol(ParserSym.CURVA, yytext());   }
+
+        /*OTROS*/
+        ","                 {return symbol(ParserSym.COMA, yytext());   }
+        {LineTerminator}    {return symbol(ParserSym.FIN, yytext());    }
     }
 
 //   <YYINITIAL> {CADENACOMILLASDOBLES} {
@@ -106,9 +110,9 @@ COMENTARIO     =  {EndOfLineComment} | {ComentarioMultiLine}
             {ENTERO}        {     return symbol(ParserSym.ENTERO, yytext());       }
             {DECIMAL}       {     return symbol(ParserSym.DECIMAL, yytext());      }
             /* Comentarios */
-            {COMENTARIO}    {     /* no haceer nada */       }
+            {COMENTARIO}    {     /* no hacer nada */       }
             /* espacios en blanco */
-            {WhiteSpace}+   {     /* no haceer nada */        }
+            {WhiteSpace}+   {     /* no hacer nada */        }
     }
 
 [^] {    /* listaErrores.add(new Errores(TipoError.LEXICO, "El caracter no es valido: "+yytext(), yyline, yycolumn));    */

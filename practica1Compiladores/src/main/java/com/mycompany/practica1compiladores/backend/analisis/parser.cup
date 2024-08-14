@@ -6,17 +6,10 @@ import com.mycompany.practica1compiladores.backend.figura.ColorEnum;
 import com.mycompany.practica1compiladores.backend.instruccion.*;
 import com.mycompany.practica1compiladores.backend.expresion.*;
 import com.mycompany.practica1compiladores.backend.symbol.*;
-//import org.example.backend.interprete.abstracto.Instruccion;
-//import org.example.backend.interprete.expresion.*;
-//import org.example.backend.interprete.error.*;
-//import org.example.backend.interprete.simbol.*;
-
-//import org.example.backend.interprete.instruccion.*;
 
 class Parser;
 
 parser code {:
-
     //public LinkedList<Errores> listaErrores = new LinkedList<>();
 
 //TipoError tipo, String desc, int lineaa, int columaa
@@ -41,26 +34,22 @@ parser code {:
 
 
 //** Simboloes terminal **//
-terminal String CADENA, ENTERO, DECIMAL, ID;
+terminal String ENTERO, DECIMAL, ID;
 terminal LPAREN, RPAREN, MAS, MENOS, POR, DIV, LINEA, CURVA, UMENOS;
 terminal COL_AZUL, COL_ROJO, COL_AMARILLO, COL_VERDE, COL_GRIS;
 terminal COL_NEGRO, COL_NARANJA, COL_CELESTE, COL_VIOLETA;
 terminal GRAFICAR, CIRCULO, CUADRADO, RECTANGULO, POLIGONO, ANIMAR;
-terminal OBJETO, ANTERIOR;
+terminal OBJETO, ANTERIOR, COMA, FIN;
 
 //** Simbolos no terminales **//
 nonterminal LinkedList<Instruccion> INICIO, INSTRUCCIONES;
 nonterminal Instruccion INSTRUCCION;
-// nonterminal LinkedList<Instruccion> LISTA;
-// nonterminal LinkedList<LinkedList> MATRIZ;
 nonterminal Instruccion EXPRESION;
-nonterminal Tipo TIPOS;
-nonterminal Tipo COLORES;
+nonterminal GRAPH, ANI;
+//nonterminal Tipo TIPOS;
+nonterminal TipoColor COLORES;
 
 //** Precedencia **//
-//precedence left OR, AND, XOR;
-//precedence right NOT;
-//precedence left EQ, NE, MENOR, MENOR_IGUAL, MAYOR, MAYOR_IGUAL;
 precedence left MAS, MENOS;
 precedence left POR, DIV;
 precedence right UMENOS;
@@ -76,29 +65,46 @@ INSTRUCCIONES ::= INSTRUCCIONES:a INSTRUCCION:b     {: RESULT = a; RESULT.add(b)
                 | INSTRUCCION:a                     {: RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
 
-INSTRUCCION ::= EXPRESION: a                {:   RESULT = a;   :}
-              | error
+INSTRUCCION ::= GRAPH //:a         {:      RESULT = a;     :}
+              | ANI//:a         {:      RESULT = a;     :}
+              | EXPRESION: a    {:      RESULT = a;     :}
+              | error FIN
+;
+        //<nombre>, <posx>, <posy>, <radio>, <color>
+GRAPH ::= GRAFICAR CIRCULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+        //<nombre>, <posx>, <posy>, <tamaño lado>, <color>
+        | GRAFICAR CUADRADO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+        //(<nombre>, <posx>, <posy>, <ancho>, <alto>, <color>
+        | GRAFICAR RECTANGULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+        //<nombre>, <posx1>, <posy1>, <posx2>, <posy2>, <color>
+        | GRAFICAR LINEA LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+        //<nombre>, <posx>, <posy>, <cantidad lados>, <ancho>, <alto>, <color>
+        | GRAFICAR POLIGONO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+;
+//(<tipoanimacion>, <destinox>, <destinoy>, <orden>
+ANI ::= ANIMAR OBJETO ANTERIOR LPAREN LINEA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN
+      | ANIMAR OBJETO ANTERIOR LPAREN CURVA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN
 ;
 
 //Var(Tipo tipo, Object valor, int linea, int columna)
 EXPRESION ::= MENOS EXPRESION:a                 {:  RESULT = new Aritmetico(a, OpAritmetic.NEGACION, aleft, aright);    :}%prec UMENOS
             | EXPRESION:a MAS EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.SUMA, aleft, aright);    :}
             | EXPRESION:a MENOS EXPRESION:b     {:  RESULT = new Aritmetico(a, b, OpAritmetic.RESTA, aleft, aright);    :}
-            | EXPRESION:a POR EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.MULTIPLICACION, aleft, aright);    :}
+            | EXPRESION:a POR EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.MULT, aleft, aright);    :}
             | EXPRESION:a DIV EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.DIVISION, aleft, aright);    :}
             | LPAREN EXPRESION:a RPAREN         {:  RESULT = a;    :}
-            | ENTERO:a      {:  RESULT = new Var(new Tipo(TipoDeDato.ENTERO), Integer.parseInt(a), aleft, aright);       :}
-            | DECIMAL:a     {:  RESULT = new Var(new Tipo(TipoDeDato.DECIMAL), Double.parseDouble(a), aleft, aright);    :}
-            | ID:a          {:  RESULT = new Var(new Tipo(TipoDeDato.ID), a, aleft, aright);    :}
+            | ENTERO:a                          {:  RESULT = new Var(new Tipo(TipoDeDato.ENTERO), Integer.parseInt(a), aleft, aright);       :}
+            | DECIMAL:a                         {:  RESULT = new Var(new Tipo(TipoDeDato.DECIMAL), Double.parseDouble(a), aleft, aright);    :}
+            | ID:a                              {:  RESULT = new Var(new Tipo(TipoDeDato.ID), a, aleft, aright);    :}
 ;
 
 COLORES ::= COL_AMARILLO    {:  RESULT = new TipoColor(ColorEnum.AMARILLO);     :} 
           | COL_VERDE       {:  RESULT = new TipoColor(ColorEnum.VERDE);        :} 
-          | COL_ROJO        {:  RESULT = new TipoColor(ColorEnum.ROJO);     :}
-          | COL_GRIS        {:  RESULT = new TipoColor(ColorEnum.GRIS);     :}
-          | COL_AZUL        {:  RESULT = new TipoColor(ColorEnum.AZUL);     :}
-          | COL_NARANJA     {:  RESULT = new TipoColor(ColorEnum.NARANJA);  :}
-          | COL_CELESTE     {:  RESULT = new TipoColor(ColorEnum.CELESTE);  :}
-          | COL_VIOLETA     {:  RESULT = new TipoColor(ColorEnum.VIOLETA);  :}
-          | COL_NEGRO       {:  RESULT = new TipoColor(ColorEnum.NEGRO);     :}          
+          | COL_ROJO        {:  RESULT = new TipoColor(ColorEnum.ROJO);         :}
+          | COL_GRIS        {:  RESULT = new TipoColor(ColorEnum.GRIS);         :}
+          | COL_AZUL        {:  RESULT = new TipoColor(ColorEnum.AZUL);         :}
+          | COL_NARANJA     {:  RESULT = new TipoColor(ColorEnum.NARANJA);      :}
+          | COL_CELESTE     {:  RESULT = new TipoColor(ColorEnum.CELESTE);      :}
+          | COL_VIOLETA     {:  RESULT = new TipoColor(ColorEnum.VIOLETA);      :}
+          | COL_NEGRO       {:  RESULT = new TipoColor(ColorEnum.NEGRO);        :}          
 ;

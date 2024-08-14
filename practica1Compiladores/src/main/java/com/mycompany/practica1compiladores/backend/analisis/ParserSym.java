@@ -8,42 +8,42 @@ package com.mycompany.practica1compiladores.backend.analisis;
 /** CUP generated class containing symbol constants. */
 public class ParserSym {
   /* terminals */
-  public static final int LINEA = 12;
-  public static final int COL_NARANJA = 21;
-  public static final int MENOS = 9;
-  public static final int CADENA = 2;
-  public static final int COL_GRIS = 19;
-  public static final int RPAREN = 7;
-  public static final int DECIMAL = 4;
-  public static final int COL_CELESTE = 22;
-  public static final int COL_VERDE = 18;
-  public static final int CURVA = 13;
-  public static final int ANIMAR = 29;
-  public static final int CUADRADO = 26;
-  public static final int OBJETO = 30;
-  public static final int UMENOS = 14;
-  public static final int COL_AMARILLO = 17;
-  public static final int LPAREN = 6;
-  public static final int ID = 5;
-  public static final int POR = 10;
-  public static final int GRAFICAR = 24;
-  public static final int COL_ROJO = 16;
+  public static final int LINEA = 11;
+  public static final int COL_NARANJA = 20;
+  public static final int MENOS = 8;
+  public static final int COL_GRIS = 18;
+  public static final int RPAREN = 6;
+  public static final int DECIMAL = 3;
+  public static final int COL_CELESTE = 21;
+  public static final int COL_VERDE = 17;
+  public static final int CURVA = 12;
+  public static final int ANIMAR = 28;
+  public static final int CUADRADO = 25;
+  public static final int OBJETO = 29;
+  public static final int UMENOS = 13;
+  public static final int LPAREN = 5;
+  public static final int COL_AMARILLO = 16;
+  public static final int ID = 4;
+  public static final int POR = 9;
+  public static final int GRAFICAR = 23;
+  public static final int COMA = 31;
+  public static final int COL_ROJO = 15;
   public static final int EOF = 0;
-  public static final int DIV = 11;
-  public static final int POLIGONO = 28;
+  public static final int DIV = 10;
+  public static final int POLIGONO = 27;
   public static final int error = 1;
-  public static final int COL_VIOLETA = 23;
-  public static final int CIRCULO = 25;
-  public static final int COL_NEGRO = 20;
-  public static final int ENTERO = 3;
-  public static final int ANTERIOR = 31;
-  public static final int COL_AZUL = 15;
-  public static final int RECTANGULO = 27;
-  public static final int MAS = 8;
+  public static final int COL_VIOLETA = 22;
+  public static final int CIRCULO = 24;
+  public static final int COL_NEGRO = 19;
+  public static final int ENTERO = 2;
+  public static final int FIN = 32;
+  public static final int ANTERIOR = 30;
+  public static final int COL_AZUL = 14;
+  public static final int RECTANGULO = 26;
+  public static final int MAS = 7;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
-  "CADENA",
   "ENTERO",
   "DECIMAL",
   "ID",
@@ -72,7 +72,9 @@ public class ParserSym {
   "POLIGONO",
   "ANIMAR",
   "OBJETO",
-  "ANTERIOR"
+  "ANTERIOR",
+  "COMA",
+  "FIN"
   };
 }
 
