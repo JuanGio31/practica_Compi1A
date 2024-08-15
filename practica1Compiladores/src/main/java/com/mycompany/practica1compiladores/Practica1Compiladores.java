@@ -19,9 +19,10 @@ public class Practica1Compiladores {
         System.out.println("\n\n");
         String texto = "graficar poligono ( PoligA, (2.3-2)*12  + 2 -1/12, 15, 6, 50 / 2, 12, amarillo)\n" +
                 "animar objeto anterior (curva, 50*3-4, 75+ 15/5, 2-1)\n";
+                System.out.println();
         String str = "2+2+6";
         try {
-            StringReader stringReader = new StringReader(str);
+            StringReader stringReader = new StringReader(texto);
             Scan scan = new Scan(stringReader);
             Parser parser = new Parser(scan);
             var resultado = parser.parse();

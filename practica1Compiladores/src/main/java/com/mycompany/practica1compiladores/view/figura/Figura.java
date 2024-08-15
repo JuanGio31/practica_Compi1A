@@ -1,9 +1,14 @@
-package com.mycompany.practica1compiladores.backend.figura;
+package com.mycompany.practica1compiladores.view.figura;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+import javax.swing.JPanel;
 
 /**
  * @author giovanic
  */
-public class Figura {
+public class Figura extends JPanel {
     private String nombre;
     private int posX;
     private int posY;
@@ -19,6 +24,26 @@ public class Figura {
     @Override
     public String toString() {
         return "Figura [nombre=" + nombre + ", posX=" + posX + ", posY=" + posY + ", color=" + color + "]";
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
+
+    protected Color getColor(ColorEnum c) {
+        return switch (c) {
+            case AZUL -> Color.BLUE;
+            case ROJO -> Color.RED;
+            case AMARILLO -> Color.YELLOW;
+            case VERDE -> Color.GREEN;
+            case GRIS -> Color.GRAY;
+            case NEGRO -> Color.BLACK;
+            case NARANJA -> Color.ORANGE;
+            case CELESTE -> Color.CYAN;
+            case VIOLETA -> Color.MAGENTA;
+            default -> null;
+        };
     }
 
     public Figura(String nombre) {

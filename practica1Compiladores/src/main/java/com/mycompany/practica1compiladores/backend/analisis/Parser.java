@@ -7,10 +7,12 @@ package com.mycompany.practica1compiladores.backend.analisis;
 
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import com.mycompany.practica1compiladores.backend.figura.ColorEnum;
+
 import com.mycompany.practica1compiladores.backend.instruccion.*;
 import com.mycompany.practica1compiladores.backend.expresion.*;
 import com.mycompany.practica1compiladores.backend.symbol.*;
+import com.mycompany.practica1compiladores.view.figura.ColorEnum;
+
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -429,7 +431,7 @@ class CUP$Parser$actions {
           case 8: // GRAPH ::= GRAFICAR CIRCULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("GRAFICAR -> CIRCULO");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("GRAPH",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-13)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -438,7 +440,7 @@ class CUP$Parser$actions {
           case 9: // GRAPH ::= GRAFICAR CUADRADO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("GRAFICAR -> CUADRADO");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("GRAPH",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-13)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -447,7 +449,7 @@ class CUP$Parser$actions {
           case 10: // GRAPH ::= GRAFICAR RECTANGULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("GRAFICAR -> RECTANGULO");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("GRAPH",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-15)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -456,7 +458,7 @@ class CUP$Parser$actions {
           case 11: // GRAPH ::= GRAFICAR LINEA LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("GRAFICAR -> LINEA");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("GRAPH",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-15)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -465,7 +467,7 @@ class CUP$Parser$actions {
           case 12: // GRAPH ::= GRAFICAR POLIGONO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("GRAFICAR -> POLIGONO");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("GRAPH",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-17)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -474,7 +476,7 @@ class CUP$Parser$actions {
           case 13: // ANI ::= ANIMAR OBJETO ANTERIOR LPAREN LINEA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("ANIMAR OBJETO -> LINEA");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("ANI",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-12)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -483,7 +485,7 @@ class CUP$Parser$actions {
           case 14: // ANI ::= ANIMAR OBJETO ANTERIOR LPAREN CURVA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN 
             {
               Object RESULT =null;
-
+		      System.out.println("ANIMAR OBJETO -> LINEA");    
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("ANI",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-12)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

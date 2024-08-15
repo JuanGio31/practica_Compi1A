@@ -72,18 +72,25 @@ INSTRUCCION ::= GRAPH //:a         {:      RESULT = a;     :}
 ;
         //<nombre>, <posx>, <posy>, <radio>, <color>
 GRAPH ::= GRAFICAR CIRCULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+            {:      System.out.println("GRAFICAR -> CIRCULO");    :}
         //<nombre>, <posx>, <posy>, <tamaño lado>, <color>
         | GRAFICAR CUADRADO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+            {:      System.out.println("GRAFICAR -> CUADRADO");    :}
         //(<nombre>, <posx>, <posy>, <ancho>, <alto>, <color>
         | GRAFICAR RECTANGULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+            {:      System.out.println("GRAFICAR -> RECTANGULO");    :}                
         //<nombre>, <posx1>, <posy1>, <posx2>, <posy2>, <color>
         | GRAFICAR LINEA LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+            {:      System.out.println("GRAFICAR -> LINEA");    :}
         //<nombre>, <posx>, <posy>, <cantidad lados>, <ancho>, <alto>, <color>
         | GRAFICAR POLIGONO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
+            {:      System.out.println("GRAFICAR -> POLIGONO");    :}
 ;
 //(<tipoanimacion>, <destinox>, <destinoy>, <orden>
 ANI ::= ANIMAR OBJETO ANTERIOR LPAREN LINEA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN
+            {:      System.out.println("ANIMAR OBJETO -> LINEA");    :}
       | ANIMAR OBJETO ANTERIOR LPAREN CURVA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN
+            {:      System.out.println("ANIMAR OBJETO -> LINEA");    :}
 ;
 
 //Var(Tipo tipo, Object valor, int linea, int columna)

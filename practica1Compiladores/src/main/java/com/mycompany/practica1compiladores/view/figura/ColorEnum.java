@@ -1,4 +1,4 @@
-package com.mycompany.practica1compiladores.backend.figura;
+package com.mycompany.practica1compiladores.view.figura;
 
 public enum ColorEnum {
     AZUL,
