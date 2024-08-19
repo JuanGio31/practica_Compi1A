@@ -1,20 +1,7 @@
 package com.mycompany.practica1compiladores;
 
-import java.io.StringReader;
-import java.util.LinkedList;
-
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.WindowConstants;
-import com.mycompany.practica1compiladores.backend.error.Error;
-import com.mycompany.practica1compiladores.backend.analisis.Parser;
-import com.mycompany.practica1compiladores.backend.analisis.Scan;
-import com.mycompany.practica1compiladores.backend.instruccion.Instruccion;
-import com.mycompany.practica1compiladores.backend.symbol.Arbol;
-import com.mycompany.practica1compiladores.backend.symbol.TablaDeSimbolo;
-import com.mycompany.practica1compiladores.view.ListaFiguras;
-import com.mycompany.practica1compiladores.view.figura.Figura;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
+import com.mycompany.practica1compiladores.view.VentanaPrincipal;
 
 /**
  *
@@ -23,17 +10,14 @@ import com.mycompany.practica1compiladores.view.figura.Figura;
 public class Practica1Compiladores {
 
     public static void main(String[] args) {
-        // JFrame fr = new JFrame("prueba");
-        // fr.setSize(800, 600);
-        // fr.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        // Figura fg = new Cuadrado("pr", 10, 10, 100, ColorEnum.AZUL);
-        // fr.add(fg);
-        // fr.setVisible(true);
-
-        // System.out.println((2.3-2)*12 + 2 -1/12);
-        init();
+        FlatMacDarkLaf.setup();
+        java.awt.EventQueue.invokeLater(() -> {
+            new VentanaPrincipal().setVisible(true);
+        });
+        //init();
     }
 
+    /*
     public static void init() {
         JFrame fr = new JFrame("prueba");
         fr.setSize(500, 300);
@@ -57,7 +41,7 @@ public class Practica1Compiladores {
                 animar objeto anterior (linea, 300, 6+ 15/5+112, 2-1/2+1)
                 graficar linea (linea_Amarillo, 1 * 3 + 2, 7.5+7.5, 4 / 4+100, 30/2, gris)
                 animar objeto anterior (linea, 120, 15, 3)
-                animar objeto anterior (linea, 150, 200, 0)
+                animar objeto anterior (curva, 150, 200, 0)
                 graficar cuadrado ( figura_cuadrada, 12*3+200, 15+1+300, (15-3) / 4+1.8+0.2, verde)
                 graficar poligono ( PoligB, 100, 400, 9, 25 / 2 + 100.5, 50*2-10, rosado)
                                                                         """;
@@ -96,6 +80,7 @@ public class Practica1Compiladores {
             System.out.println(e);
         }
     }
+     */
 }
 
 // FlatDarculaLaf.setup();

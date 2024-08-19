@@ -1,12 +1,12 @@
 package com.mycompany.practica1compiladores.backend.error;
 
 public class Error {
-    private String tipo;
+    private TipoError tipo;
     private String descripcion;
     private int linea;
     private int columna;
 
-    public Error(String tipo, String descripcion, int linea, int columna) {
+    public Error(TipoError tipo, String descripcion, int linea, int columna) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.linea = linea;
@@ -19,11 +19,11 @@ public class Error {
                 + "]";
     }
 
-    public String getTipo() {
+    public TipoError getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoError tipo) {
         this.tipo = tipo;
     }
 
