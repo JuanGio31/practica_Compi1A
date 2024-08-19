@@ -8,7 +8,8 @@ import javax.swing.JPanel;
 /**
  * @author giovanic
  */
-public class Figura extends JPanel {
+abstract public class Figura extends JPanel {
+
     private String nombre;
     private int posX;
     private int posY;
@@ -25,24 +26,36 @@ public class Figura extends JPanel {
     public String toString() {
         return "Figura [nombre=" + nombre + ", posX=" + posX + ", posY=" + posY + ", color=" + color + "]";
     }
+//
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//    }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-    }
+    public abstract void dibujar(Graphics g);
 
     protected Color getColor(ColorEnum c) {
         return switch (c) {
-            case AZUL -> Color.BLUE;
-            case ROJO -> Color.RED;
-            case AMARILLO -> Color.YELLOW;
-            case VERDE -> Color.GREEN;
-            case GRIS -> Color.GRAY;
-            case NEGRO -> Color.BLACK;
-            case NARANJA -> Color.ORANGE;
-            case CELESTE -> Color.CYAN;
-            case VIOLETA -> Color.MAGENTA;
-            default -> null;
+            case AZUL ->
+                Color.BLUE;
+            case ROJO ->
+                Color.RED;
+            case AMARILLO ->
+                Color.YELLOW;
+            case VERDE ->
+                Color.GREEN;
+            case GRIS ->
+                Color.GRAY;
+            case NEGRO ->
+                Color.BLACK;
+            case NARANJA ->
+                Color.ORANGE;
+            case CELESTE ->
+                Color.CYAN;
+            case VIOLETA ->
+                Color.MAGENTA;
+            default ->
+                null;
         };
     }
 

@@ -36,7 +36,6 @@ public class ParserSym {
   public static final int CIRCULO = 24;
   public static final int COL_NEGRO = 19;
   public static final int ENTERO = 2;
-  public static final int FIN = 32;
   public static final int ANTERIOR = 30;
   public static final int COL_AZUL = 14;
   public static final int RECTANGULO = 26;
@@ -73,8 +72,7 @@ public class ParserSym {
   "ANIMAR",
   "OBJETO",
   "ANTERIOR",
-  "COMA",
-  "FIN"
+  "COMA"
   };
 }
 

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Cuadrado extends Figura {
+
     private int lado;
 
     public Cuadrado(String nombre, int posX, int posY, int lado, ColorEnum color) {
@@ -16,13 +17,20 @@ public class Cuadrado extends Figura {
         return "Cuadrado [lado=" + lado + ", toString()=" + super.toString() + "]";
     }
 
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(getColor(getColor()));
+//        // Dibuja el cuadrado usando el método fillRect
+//        g2d.fillRect(getPosX(), getPosY(), getLado(), getLado());
+//    }
+
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(getColor(getColor()));
+    public void dibujar(Graphics g) {
+        g.setColor(getColor(getColor()));
         // Dibuja el cuadrado usando el método fillRect
-        g2d.fillRect(getPosX(), getPosY(), getLado(), getLado());
+        g.fillRect(getPosX(), getPosY(), getLado(), getLado());
     }
 
     public int getLado() {

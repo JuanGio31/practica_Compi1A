@@ -2,10 +2,10 @@ package com.mycompany.practica1compiladores.backend.analisis;
 
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import com.mycompany.practica1compiladores.backend.figura.ColorEnum;
 import com.mycompany.practica1compiladores.backend.instruccion.*;
 import com.mycompany.practica1compiladores.backend.expresion.*;
 import com.mycompany.practica1compiladores.backend.symbol.*;
+import com.mycompany.practica1compiladores.view.figura.ColorEnum;
 
 class Parser;
 
@@ -39,15 +39,16 @@ terminal LPAREN, RPAREN, MAS, MENOS, POR, DIV, LINEA, CURVA, UMENOS;
 terminal COL_AZUL, COL_ROJO, COL_AMARILLO, COL_VERDE, COL_GRIS;
 terminal COL_NEGRO, COL_NARANJA, COL_CELESTE, COL_VIOLETA;
 terminal GRAFICAR, CIRCULO, CUADRADO, RECTANGULO, POLIGONO, ANIMAR;
-terminal OBJETO, ANTERIOR, COMA, FIN;
+terminal OBJETO, ANTERIOR, COMA;// FIN;
 
 //** Simbolos no terminales **//
 nonterminal LinkedList<Instruccion> INICIO, INSTRUCCIONES;
 nonterminal Instruccion INSTRUCCION;
-nonterminal Instruccion EXPRESION;
-nonterminal GRAPH, ANI;
+nonterminal Instruccion EXPRESION, GRAPH;
+nonterminal ANI;
 //nonterminal Tipo TIPOS;
 nonterminal TipoColor COLORES;
+//nonterminal TipoFigura FIGURAS;
 
 //** Precedencia **//
 precedence left MAS, MENOS;
@@ -65,32 +66,32 @@ INSTRUCCIONES ::= INSTRUCCIONES:a INSTRUCCION:b     {: RESULT = a; RESULT.add(b)
                 | INSTRUCCION:a                     {: RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
 
-INSTRUCCION ::= GRAPH //:a         {:      RESULT = a;     :}
+INSTRUCCION ::= GRAPH:a         {:      RESULT = a;     :}
               | ANI//:a         {:      RESULT = a;     :}
               | EXPRESION: a    {:      RESULT = a;     :}
-              | error FIN
+              | error
 ;
         //<nombre>, <posx>, <posy>, <radio>, <color>
-GRAPH ::= GRAFICAR CIRCULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
-            {:      System.out.println("GRAFICAR -> CIRCULO");    :}
+GRAPH ::= GRAFICAR CIRCULO LPAREN EXPRESION:a COMA EXPRESION:b COMA EXPRESION:c COMA EXPRESION:d COMA COLORES:e RPAREN 
+            {:  RESULT = new GraficarF(a, b, c, d, FiguraEnum.CIRCULO, e, aleft, aright);   :}
         //<nombre>, <posx>, <posy>, <tamaño lado>, <color>
-        | GRAFICAR CUADRADO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
-            {:      System.out.println("GRAFICAR -> CUADRADO");    :}
+        | GRAFICAR CUADRADO LPAREN EXPRESION:a COMA EXPRESION:b COMA EXPRESION:c COMA EXPRESION:d COMA COLORES:e RPAREN
+            {:  RESULT = new GraficarF(a, b, c, d, FiguraEnum.CUADRADO, e, aleft, aright);   :}
         //(<nombre>, <posx>, <posy>, <ancho>, <alto>, <color>
-        | GRAFICAR RECTANGULO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
-            {:      System.out.println("GRAFICAR -> RECTANGULO");    :}                
+        | GRAFICAR RECTANGULO LPAREN EXPRESION:a COMA EXPRESION:b COMA EXPRESION:c COMA EXPRESION:d COMA EXPRESION:e COMA COLORES:f RPAREN 
+            {:  RESULT = new GraficarF(a, b, c, d, e,FiguraEnum.RECTANGULO, f, aleft, aright);   :}            
         //<nombre>, <posx1>, <posy1>, <posx2>, <posy2>, <color>
-        | GRAFICAR LINEA LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
-            {:      System.out.println("GRAFICAR -> LINEA");    :}
+        | GRAFICAR LINEA LPAREN EXPRESION:a COMA EXPRESION:b COMA EXPRESION:c COMA EXPRESION:d COMA EXPRESION:e COMA COLORES:f RPAREN 
+            {:  RESULT = new GraficarF(a, b, c, d, e,FiguraEnum.LINEA, f, aleft, aright);   :}  
         //<nombre>, <posx>, <posy>, <cantidad lados>, <ancho>, <alto>, <color>
-        | GRAFICAR POLIGONO LPAREN ID COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA EXPRESION COMA COLORES RPAREN FIN
-            {:      System.out.println("GRAFICAR -> POLIGONO");    :}
+        | GRAFICAR POLIGONO LPAREN EXPRESION:a COMA EXPRESION:b COMA EXPRESION:c COMA EXPRESION:d COMA EXPRESION:e COMA EXPRESION:f COMA COLORES:g RPAREN 
+            {:  RESULT = new GraficarF(a, b, c, d, e, f, FiguraEnum.POLIGONO, g, aleft, aright);   :}  
 ;
 //(<tipoanimacion>, <destinox>, <destinoy>, <orden>
-ANI ::= ANIMAR OBJETO ANTERIOR LPAREN LINEA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN
+ANI ::= ANIMAR OBJETO ANTERIOR LPAREN LINEA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN
             {:      System.out.println("ANIMAR OBJETO -> LINEA");    :}
-      | ANIMAR OBJETO ANTERIOR LPAREN CURVA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN FIN
-            {:      System.out.println("ANIMAR OBJETO -> LINEA");    :}
+      | ANIMAR OBJETO ANTERIOR LPAREN CURVA COMA EXPRESION COMA EXPRESION COMA EXPRESION RPAREN
+            {:      System.out.println("ANIMAR OBJETO -> CURVA");    :}
 ;
 
 //Var(Tipo tipo, Object valor, int linea, int columna)
@@ -115,3 +116,10 @@ COLORES ::= COL_AMARILLO    {:  RESULT = new TipoColor(ColorEnum.AMARILLO);     
           | COL_VIOLETA     {:  RESULT = new TipoColor(ColorEnum.VIOLETA);      :}
           | COL_NEGRO       {:  RESULT = new TipoColor(ColorEnum.NEGRO);        :}          
 ;
+
+// FIGURAS ::= CIRCULO         {:  RESULT = new TipoFigura(FiguraEnum.CIRCULO);        :} 
+//           | CUADRADO        {:  RESULT = new TipoFigura(FiguraEnum.CUADRADO);       :} 
+//           | RECTANGULO      {:  RESULT = new TipoFigura(FiguraEnum.RECTANGULO);     :} 
+//           | LINEA           {:  RESULT = new TipoFigura(FiguraEnum.LINEA);          :} 
+//           | POLIGONO        {:  RESULT = new TipoFigura(FiguraEnum.POLIGONO);       :} 
+// ;

@@ -30,7 +30,6 @@ public class Aritmetico extends Instruccion {
 
     @Override
     public Object interpretar(Arbol arbol, TablaDeSimbolo tabla) {
-        System.out.println("Operador aritmetico\n");
         Object opIzq = null, opDer = null, Unico = null;
         if (this.operandoUnico != null) {
             Unico = this.operandoUnico.interpretar(arbol, tabla);
@@ -95,9 +94,13 @@ public class Aritmetico extends Instruccion {
         switch (tipo1) {
             case ENTERO -> {
                 switch (tipo2) {
-                    case ENTERO, DECIMAL -> {
+                    case ENTERO -> {
+                        this.getTipo().setTipo(TipoDeDato.ENTERO);
+                        return Integer.parseInt(opIzq.toString()) / Integer.parseInt(opDer.toString());
+                    }
+                    case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (double) opIzq / (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) / Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Division erronea", getLinea(), getColumna());
@@ -108,7 +111,7 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (double) opIzq / (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) / Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Division erronea", getLinea(), getColumna());
@@ -131,11 +134,11 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
-                        return (int) opIzq * (int) opDer;
+                        return Integer.parseInt(opIzq.toString()) * Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (int) opIzq * (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) * Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Multiplicacion erronea", getLinea(), getColumna());
@@ -144,13 +147,9 @@ public class Aritmetico extends Instruccion {
             }
             case DECIMAL -> {
                 switch (tipo2) {
-                    case ENTERO -> {
-                        this.getTipo().setTipo(TipoDeDato.ENTERO);
-                        return (int) opIzq * (int) opDer;
-                    }
-                    case DECIMAL -> {
+                    case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (double) opIzq * (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) * Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Multiplicacion erronea", getLinea(), getColumna());
@@ -173,11 +172,11 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
-                        return (int) opIzq - (int) opDer;
+                        return Integer.parseInt(opIzq.toString()) - Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (int) opIzq - (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Resta erronea", getLinea(), getColumna());
@@ -186,13 +185,9 @@ public class Aritmetico extends Instruccion {
             }
             case DECIMAL -> {
                 switch (tipo2) {
-                    case ENTERO -> {
-                        this.getTipo().setTipo(TipoDeDato.ENTERO);
-                        return (int) opIzq - (int) opDer;
-                    }
-                    case DECIMAL -> {
+                    case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (double) opIzq - (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Resta erronea", getLinea(), getColumna());
@@ -215,11 +210,11 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
-                        return (int) opIzq + (int) opDer;
+                        return Integer.parseInt(opIzq.toString()) + Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (int) opIzq + (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) + Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Suma erronea", getLinea(), getColumna());
@@ -228,13 +223,9 @@ public class Aritmetico extends Instruccion {
             }
             case DECIMAL -> {
                 switch (tipo2) {
-                    case ENTERO -> {
-                        this.getTipo().setTipo(TipoDeDato.ENTERO);
-                        return (int) opIzq + (int) opDer;
-                    }
-                    case DECIMAL -> {
+                    case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return (double) opIzq + (double) opDer;
+                        return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error("SEMANTICO", "Suma erronea", getLinea(), getColumna());

@@ -13,6 +13,12 @@ public class Error {
         this.columna = columna;
     }
 
+    @Override
+    public String toString() {
+        return "Error [tipo=" + tipo + ", descripcion=" + descripcion + ", linea=" + linea + ", columna=" + columna
+                + "]";
+    }
+
     public String getTipo() {
         return tipo;
     }

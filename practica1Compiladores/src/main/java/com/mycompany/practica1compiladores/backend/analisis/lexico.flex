@@ -24,15 +24,15 @@ import java.util.LinkedList;
 
 LineTerminator       = \r|\n|\r\n
 InputCharacter       = [^\r\n]
-CommentContent       = ( [^*] | \*+ [^/*] )*
-ComentarioMultiLine  = "/*" {CommentContent} "*"+ "/"
-EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
-WhiteSpace           = [ \t\f]
+//CommentContent       = ( [^*] | \*+ [^/*] )*
+//ComentarioMultiLine  = "/*" {CommentContent} "*"+ "/"
+//EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
+WhiteSpace           = {LineTerminator} | [ \t\f]
 
 IDENTIFICADOR  = [A-Za-z_][A-Za-z0-9_]*
 ENTERO         = [0-9]+
 DECIMAL        = [0-9]+"."[0-9]+
-COMENTARIO     =  {EndOfLineComment} | {ComentarioMultiLine}
+//COMENTARIO     =  {EndOfLineComment} | {ComentarioMultiLine}
 //CHARACTER      = "\'" [^\'] "\'"
 //CADENACOMILLASDOBLES = [\"]([^\r\"])*[\"]
 
@@ -94,7 +94,7 @@ COMENTARIO     =  {EndOfLineComment} | {ComentarioMultiLine}
 
         /*OTROS*/
         ","                 {return symbol(ParserSym.COMA, yytext());   }
-        {LineTerminator}    {return symbol(ParserSym.FIN, yytext());    }
+        //{LineTerminator}    {return symbol(ParserSym.FIN, yytext());    }
     }
 
 //   <YYINITIAL> {CADENACOMILLASDOBLES} {
@@ -110,7 +110,7 @@ COMENTARIO     =  {EndOfLineComment} | {ComentarioMultiLine}
             {ENTERO}        {     return symbol(ParserSym.ENTERO, yytext());       }
             {DECIMAL}       {     return symbol(ParserSym.DECIMAL, yytext());      }
             /* Comentarios */
-            {COMENTARIO}    {     /* no hacer nada */       }
+            //{COMENTARIO}    {     /* no hacer nada */       }
             /* espacios en blanco */
             {WhiteSpace}+   {     /* no hacer nada */        }
     }

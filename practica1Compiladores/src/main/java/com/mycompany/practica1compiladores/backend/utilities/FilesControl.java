@@ -163,4 +163,8 @@ public class FilesControl {
         }
         return null;
     }
+    
+    public void guardarImagen(){
+        
+    }
 }

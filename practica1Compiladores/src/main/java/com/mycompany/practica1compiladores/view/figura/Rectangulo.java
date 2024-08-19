@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Rectangulo extends Figura {
+
     private int ancho;
     private int alto;
 
@@ -18,13 +19,20 @@ public class Rectangulo extends Figura {
         return "Rectangulo [ancho=" + ancho + ", alto=" + alto + ", toString()=" + super.toString() + "]";
     }
 
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(getColor(getColor()));
+//        // Dibuja el rectángulo usando el método fillRect
+//        g2d.fillRect(getPosX(), getPosY(), ancho, alto);
+//    }
+
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(getColor(getColor()));
+    public void dibujar(Graphics g) {
+        g.setColor(getColor(getColor()));
         // Dibuja el rectángulo usando el método fillRect
-        g2d.fillRect(getPosX(), getPosY(), ancho, alto);
+        g.fillRect(getPosX(), getPosY(), ancho, alto);
     }
 
     public int getAncho() {

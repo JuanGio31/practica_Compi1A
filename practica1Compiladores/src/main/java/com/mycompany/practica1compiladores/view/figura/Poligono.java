@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 public class Poligono extends Figura {
+
     private int cantidadLados;
     private int ancho;
     private int alto;
@@ -18,15 +19,33 @@ public class Poligono extends Figura {
 
     @Override
     public String toString() {
-        return "Poligono [cantidadLados=" + cantidadLados + ", ancho=" +
-                ancho + ", alto=" + alto + ", toString()=" + super.toString() + "]";
+        return "Poligono [cantidadLados=" + cantidadLados + ", ancho="
+                + ancho + ", alto=" + alto + ", toString()=" + super.toString() + "]";
     }
 
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(getColor(getColor()));
+//
+//        // Crear el polígono
+//        Polygon polygon = new Polygon();
+//        double angleStep = 2 * Math.PI / cantidadLados;
+//
+//        for (int i = 0; i < cantidadLados; i++) {
+//            double angle = i * angleStep;
+//            int x = (int) (getPosX() + ancho * Math.cos(angle));
+//            int y = (int) (getPosY() + alto * Math.sin(angle));
+//            polygon.addPoint(x, y);
+//        }
+//        // Dibujar el polígono
+//        g2d.fillPolygon(polygon);
+//    }
+
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(getColor(getColor()));
+    public void dibujar(Graphics g) {
+        g.setColor(getColor(getColor()));
 
         // Crear el polígono
         Polygon polygon = new Polygon();
@@ -39,7 +58,7 @@ public class Poligono extends Figura {
             polygon.addPoint(x, y);
         }
         // Dibujar el polígono
-        g2d.fillPolygon(polygon);
+        g.fillPolygon(polygon);
     }
 
     public int getCantidadLados() {

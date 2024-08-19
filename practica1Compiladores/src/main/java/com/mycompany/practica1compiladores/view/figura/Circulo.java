@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Circulo extends Figura {
+
     private int radio;
 
     public Circulo(String nombre, int posX, int posY, int radio, ColorEnum color) {
@@ -15,15 +16,21 @@ public class Circulo extends Figura {
     public String toString() {
         return "Circulo [radio=" + radio + ", toString()=" + super.toString() + "]";
     }
-    
+
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(getColor(getColor()));
+//        // Dibuja el círculo usando el método fillOval
+//        g2d.fillOval(getPosX() - radio, getPosY() - radio, 2 * radio, 2 * radio);
+//    }
 
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(getColor(getColor()));
+    public void dibujar(Graphics g) {
+        g.setColor(getColor(getColor()));
         // Dibuja el círculo usando el método fillOval
-        g2d.fillOval(getPosX() - radio, getPosY() - radio, 2 * radio, 2 * radio);
+        g.fillOval(getX(), getY(), radio * 2, radio * 2);
     }
 
     public int getRadio() {

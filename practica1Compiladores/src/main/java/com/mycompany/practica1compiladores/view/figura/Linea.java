@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 public class Linea extends Figura {
+
     private int posX2;
     private int posY2;
 
@@ -18,12 +19,18 @@ public class Linea extends Figura {
         return "Linea [posX2=" + posX2 + ", posY2=" + posY2 + ", toString()=" + super.toString() + "]";
     }
 
+//    @Override
+//    protected void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        Graphics2D g2d = (Graphics2D) g;
+//        g2d.setColor(getColor(getColor()));
+//        g2d.drawLine(getPosX(), getPosY(), posX2, posY2);
+//    }
+
     @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(getColor(getColor()));
-        g2d.drawLine(getPosX(), getPosY(), posX2, posY2);
+    public void dibujar(Graphics g) {
+        g.setColor(getColor(getColor()));
+        g.drawLine(getPosX(), getPosY(), posX2, posY2);
     }
 
     public int getPosX2() {
