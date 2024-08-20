@@ -238,8 +238,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
                     if (res instanceof ErrorC errorC) {
                         hayError = true;
-                        System.out.println(errorC.toString());
-                        System.out.println(" - ");
                         this.errores.add(errorC);
                     }
                 }
