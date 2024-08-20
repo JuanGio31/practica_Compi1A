@@ -2,7 +2,6 @@ package com.mycompany.practica1compiladores.backend.expresion;
 
 import com.mycompany.practica1compiladores.backend.instruccion.Instruccion;
 import com.mycompany.practica1compiladores.backend.symbol.Arbol;
-import com.mycompany.practica1compiladores.backend.symbol.TablaDeSimbolo;
 import com.mycompany.practica1compiladores.backend.symbol.Tipo;
 import com.mycompany.practica1compiladores.backend.symbol.TipoDeDato;
 import com.mycompany.practica1compiladores.backend.error.TipoError;
@@ -32,19 +31,19 @@ public class Aritmetico extends Instruccion {
     }
 
     @Override
-    public Object interpretar(Arbol arbol, TablaDeSimbolo tabla) {
+    public Object interpretar(Arbol arbol) {
         Object opIzq = null, opDer = null, Unico = null;
         if (this.operandoUnico != null) {
-            Unico = this.operandoUnico.interpretar(arbol, tabla);
+            Unico = this.operandoUnico.interpretar(arbol);
             if (Unico instanceof Error) {
                 return Unico;
             }
         } else {
-            opIzq = this.operando1.interpretar(arbol, tabla);
+            opIzq = this.operando1.interpretar(arbol);
             if (opIzq instanceof Error) {
                 return opIzq;
             }
-            opDer = this.operando2.interpretar(arbol, tabla);
+            opDer = this.operando2.interpretar(arbol);
             if (opDer instanceof Error) {
                 return opDer;
             }
@@ -87,7 +86,7 @@ public class Aritmetico extends Instruccion {
         var tipo2 = this.operando2.getTipo().getTipo();
 
         double auxiliar = -1;
-        if (tipo2 == TipoDeDato.ENTERO || tipo2 == TipoDeDato.ENTERO) {
+        if (tipo2 == TipoDeDato.ENTERO || tipo2 == TipoDeDato.DECIMAL) {
             auxiliar = Double.parseDouble(String.valueOf(opDer));
         }
 

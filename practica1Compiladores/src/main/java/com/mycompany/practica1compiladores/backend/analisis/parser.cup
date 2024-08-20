@@ -49,6 +49,7 @@ terminal OBJETO, ANTERIOR, COMA;// FIN;
 nonterminal LinkedList<Instruccion> INICIO, INSTRUCCIONES;
 nonterminal Instruccion INSTRUCCION;
 nonterminal Instruccion EXPRESION, GRAPH;
+nonterminal Instruccion EXPR;
 nonterminal ANI;
 //nonterminal Tipo TIPOS;
 nonterminal TipoColor COLORES;
@@ -72,7 +73,7 @@ INSTRUCCIONES ::= INSTRUCCIONES:a INSTRUCCION:b     {: RESULT = a; RESULT.add(b)
 
 INSTRUCCION ::= GRAPH:a         {:      RESULT = a;     :}
               | ANI//:a         {:      RESULT = a;     :}
-              | EXPRESION: a    {:      RESULT = a;     :}
+            //| EXPRESION: a    {:      RESULT = a;     :}
               | error
 ;
         //<nombre>, <posx>, <posy>, <radio>, <color>
@@ -109,6 +110,8 @@ EXPRESION ::= MENOS EXPRESION:a                 {:  RESULT = new Aritmetico(a, O
             | DECIMAL:a                         {:  RESULT = new Var(new Tipo(TipoDeDato.DECIMAL), Double.parseDouble(a), aleft, aright);    :}
             | ID:a                              {:  RESULT = new Var(new Tipo(TipoDeDato.ID), a, aleft, aright);    :}
 ;
+
+//EXPR ::= ID:a                              {:  RESULT = new Var(new Tipo(TipoDeDato.ID), a, aleft, aright);    :};
 
 COLORES ::= COL_AMARILLO    {:  RESULT = new TipoColor(ColorEnum.AMARILLO);     :} 
           | COL_VERDE       {:  RESULT = new TipoColor(ColorEnum.VERDE);        :} 

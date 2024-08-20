@@ -8,6 +8,7 @@ import com.mycompany.practica1compiladores.backend.error.ErrorC;
 import com.mycompany.practica1compiladores.backend.error.TipoError;
 
 public class GraficarF extends Instruccion {
+
     // atributos para figuras
     private Instruccion nombre;
     private Instruccion pX;
@@ -59,27 +60,30 @@ public class GraficarF extends Instruccion {
     }
 
     @Override
-    public Object interpretar(Arbol arbol, TablaDeSimbolo tabla) {
-        var id = this.nombre.interpretar(arbol, tabla);
+    public Object interpretar(Arbol arbol) {
+        var id = this.nombre.interpretar(arbol);
         if (id instanceof Error) {
             return id;
+        }
+        if (this.nombre.getTipo().getTipo() != TipoDeDato.ID) {
+            return new ErrorC(TipoError.SEMANTICO, "ID no valido", getLinea(), getColumna());
         }
 
         switch (clase) {
             case CIRCULO, CUADRADO -> {
-                if (!Objects.isNull(this.pX) && !Objects.isNull(this.pY) &&
-                        !Objects.isNull(this.r)) {
-                    var posX = this.pX.interpretar(arbol, tabla);
+                if (!Objects.isNull(this.pX) && !Objects.isNull(this.pY)
+                        && !Objects.isNull(this.r)) {
+                    var posX = this.pX.interpretar(arbol);
                     if (posX instanceof Error) {
                         return posX;
                     }
-                    var posY = this.pY.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
-                        return posX;
+                    var posY = this.pY.interpretar(arbol);
+                    if (posY instanceof Error) {
+                        return posY;
                     }
-                    var lado = this.r.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
-                        return posX;
+                    var lado = this.r.interpretar(arbol);
+                    if (lado instanceof Error) {
+                        return lado;
                     }
                     return createF(id, posX, posY, lado);
                 }
@@ -87,47 +91,47 @@ public class GraficarF extends Instruccion {
             case RECTANGULO, LINEA -> {
                 if (!Objects.isNull(this.pX) && !Objects.isNull(this.pY)
                         && !Objects.isNull(this.a) && !Objects.isNull(this.b)) {
-                    var posX = this.pX.interpretar(arbol, tabla);
+                    var posX = this.pX.interpretar(arbol);
                     if (posX instanceof Error) {
                         return posX;
                     }
-                    var posY = this.pY.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
-                        return posX;
+                    var posY = this.pY.interpretar(arbol);
+                    if (posY instanceof Error) {
+                        return posY;
                     }
-                    var alto = this.a.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
+                    var alto = this.a.interpretar(arbol);
+                    if (alto instanceof Error) {
                         return alto;
                     }
-                    var base = this.b.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
+                    var base = this.b.interpretar(arbol);
+                    if (base instanceof Error) {
                         return base;
                     }
                     return createF(id, posX, posY, base, alto);
                 }
             }
             case POLIGONO -> {
-                if (!Objects.isNull(this.pX) && !Objects.isNull(this.pY) &&
-                        !Objects.isNull(this.r)
+                if (!Objects.isNull(this.pX) && !Objects.isNull(this.pY)
+                        && !Objects.isNull(this.r)
                         && !Objects.isNull(this.a) && !Objects.isNull(this.b)) {
-                    var posX = this.pX.interpretar(arbol, tabla);
+                    var posX = this.pX.interpretar(arbol);
                     if (posX instanceof Error) {
                         return posX;
                     }
-                    var posY = this.pY.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
-                        return posX;
+                    var posY = this.pY.interpretar(arbol);
+                    if (posY instanceof Error) {
+                        return posY;
                     }
-                    var lados = this.r.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
-                        return posX;
+                    var lados = this.r.interpretar(arbol);
+                    if (lados instanceof Error) {
+                        return lados;
                     }
-                    var alto = this.a.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
+                    var alto = this.a.interpretar(arbol);
+                    if (alto instanceof Error) {
                         return alto;
                     }
-                    var base = this.b.interpretar(arbol, tabla);
-                    if (posX instanceof Error) {
+                    var base = this.b.interpretar(arbol);
+                    if (base instanceof Error) {
                         return base;
                     }
                     return createF(id, posX, posY, lados, base, alto);

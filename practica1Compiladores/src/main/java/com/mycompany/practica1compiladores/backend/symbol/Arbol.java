@@ -10,11 +10,9 @@ import com.mycompany.practica1compiladores.backend.instruccion.Instruccion;
 public class Arbol {
 
     private LinkedList<Instruccion> instrucciones;
-    private TablaDeSimbolo global;
 
     public Arbol(LinkedList<Instruccion> instrucciones) {
         this.instrucciones = instrucciones;
-        this.global = new TablaDeSimbolo();
     }
 
     public LinkedList<Instruccion> getInstrucciones() {
@@ -24,13 +22,4 @@ public class Arbol {
     public void setInstrucciones(LinkedList<Instruccion> instrucciones) {
         this.instrucciones = instrucciones;
     }
-
-    public TablaDeSimbolo getGlobal() {
-        return global;
-    }
-
-    public void setGlobal(TablaDeSimbolo global) {
-        this.global = global;
-    }
-
 }

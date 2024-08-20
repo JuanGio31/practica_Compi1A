@@ -7,7 +7,6 @@ import com.mycompany.practica1compiladores.backend.analisis.Scan;
 import com.mycompany.practica1compiladores.backend.error.ErrorC;
 import com.mycompany.practica1compiladores.backend.instruccion.Instruccion;
 import com.mycompany.practica1compiladores.backend.symbol.Arbol;
-import com.mycompany.practica1compiladores.backend.symbol.TablaDeSimbolo;
 import com.mycompany.practica1compiladores.backend.utilities.FilesControl;
 import com.mycompany.practica1compiladores.backend.utilities.GestionTab;
 import com.mycompany.practica1compiladores.view.figura.Figura;
@@ -222,8 +221,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 Parser parser = new Parser(scan);
                 var resultado = parser.parse();
                 var ast = new Arbol((LinkedList<Instruccion>) resultado.value);
-                var tabla = new TablaDeSimbolo();
-                tabla.setNombre("GLOBAL");
                 errores.addAll(scan.listaErrores);
                 errores.addAll(parser.listaError);
                 if (!errores.isEmpty()) {
@@ -234,15 +231,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     if (a == null) {
                         continue;
                     }
-                    var res = a.interpretar(ast, tabla);
+                    var res = a.interpretar(ast);
                     if (res instanceof Figura f) {
                         figuras.add(f);
                     }
 
-                    if (res instanceof ErrorC r) {
+                    if (res instanceof ErrorC errorC) {
                         hayError = true;
-                        //System.out.println(r.toString());
-                        this.errores.add(r);
+                        System.out.println(errorC.toString());
+                        System.out.println(" - ");
+                        this.errores.add(errorC);
                     }
                 }
                 fr.add(lFiguras);

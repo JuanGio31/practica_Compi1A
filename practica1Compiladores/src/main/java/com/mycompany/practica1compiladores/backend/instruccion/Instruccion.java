@@ -1,7 +1,6 @@
 package com.mycompany.practica1compiladores.backend.instruccion;
 
 import com.mycompany.practica1compiladores.backend.symbol.Arbol;
-import com.mycompany.practica1compiladores.backend.symbol.TablaDeSimbolo;
 import com.mycompany.practica1compiladores.backend.symbol.Tipo;
 
 /**
@@ -19,7 +18,7 @@ abstract public class Instruccion {
         this.columna = columna;
     }
 
-    public abstract Object interpretar(Arbol arbol, TablaDeSimbolo tabla);
+    public abstract Object interpretar(Arbol arbol);
 
     public Tipo getTipo() {
         return tipo;
