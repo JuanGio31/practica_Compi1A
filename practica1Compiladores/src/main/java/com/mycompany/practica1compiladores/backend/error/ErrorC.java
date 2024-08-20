@@ -1,12 +1,12 @@
 package com.mycompany.practica1compiladores.backend.error;
 
-public class Error {
+public class ErrorC {
     private TipoError tipo;
     private String descripcion;
     private int linea;
     private int columna;
 
-    public Error(TipoError tipo, String descripcion, int linea, int columna) {
+    public ErrorC(TipoError tipo, String descripcion, int linea, int columna) {
         this.tipo = tipo;
         this.descripcion = descripcion;
         this.linea = linea;

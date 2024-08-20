@@ -4,7 +4,7 @@ import java.util.Objects;
 import com.mycompany.practica1compiladores.backend.symbol.*;
 import com.mycompany.practica1compiladores.view.figura.*;
 import com.mycompany.practica1compiladores.backend.UsoFiguras;
-import com.mycompany.practica1compiladores.backend.error.Error;
+import com.mycompany.practica1compiladores.backend.error.ErrorC;
 import com.mycompany.practica1compiladores.backend.error.TipoError;
 
 public class GraficarF extends Instruccion {
@@ -132,13 +132,13 @@ public class GraficarF extends Instruccion {
                     }
                     return createF(id, posX, posY, lados, base, alto);
                 }
-                return new Error(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
             }
             default -> {
-                return new Error(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
             }
         }
-        return new Error(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
+        return new ErrorC(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
     }
 
     private Object createF(Object id, Object posX, Object posY, Object lados, Object base, Object alto) {
@@ -170,7 +170,7 @@ public class GraficarF extends Instruccion {
                     getInt(alto),
                     color.getTipo());
         }
-        return new Error(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
+        return new ErrorC(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
     }
 
     private Object createF(Object id, Object posX, Object posY, Object lado) {
@@ -189,7 +189,7 @@ public class GraficarF extends Instruccion {
                     getInt(lado),
                     color.getTipo());
         }
-        return new Error(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
+        return new ErrorC(TipoError.SEMANTICO, "Figura invalida", getLinea(), getColumna());
     }
 
     private int getInt(Object num) {

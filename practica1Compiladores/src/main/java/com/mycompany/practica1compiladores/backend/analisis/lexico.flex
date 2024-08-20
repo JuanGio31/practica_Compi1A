@@ -1,8 +1,8 @@
 package com.mycompany.practica1compiladores.backend.analisis;
 
 import java_cup.runtime.Symbol;
-//import org.apache.commons.text.StringEscapeUtils;
-//import org.example.backend.interprete.error.*;
+import com.mycompany.practica1compiladores.backend.error.ErrorC;
+import com.mycompany.practica1compiladores.backend.error.TipoError;
 import java.util.LinkedList;
 
 
@@ -23,7 +23,7 @@ import java.util.LinkedList;
 %init}
 
 LineTerminator       = \r|\n|\r\n
-InputCharacter       = [^\r\n]
+//InputCharacter       = [^\r\n]
 //CommentContent       = ( [^*] | \*+ [^/*] )*
 //ComentarioMultiLine  = "/*" {CommentContent} "*"+ "/"
 //EndOfLineComment     = "//" {InputCharacter}* {LineTerminator}?
@@ -37,7 +37,7 @@ DECIMAL        = [0-9]+"."[0-9]+
 //CADENACOMILLASDOBLES = [\"]([^\r\"])*[\"]
 
 %{
-//    public LinkedList<Errores> listaErrores = new LinkedList<>();
+   public LinkedList<ErrorC> listaErrores = new LinkedList<>();
 
         StringBuffer str = new StringBuffer();
 
@@ -115,6 +115,11 @@ DECIMAL        = [0-9]+"."[0-9]+
             {WhiteSpace}+   {     /* no hacer nada */        }
     }
 
-[^] {    /* listaErrores.add(new Errores(TipoError.LEXICO, "El caracter no es valido: "+yytext(), yyline, yycolumn));    */
-    System.out.println("Error lexico: " + yytext() + " | [" + yyline +", " + yycolumn + "]" );
+[^] {     
+        listaErrores.add(new ErrorC(
+                         TipoError.LEXICO,
+                         "El caracter no es valido: " + yytext(),
+                         yyline, 
+                         yycolumn));
+   // System.out.println("Error lexico: " + yytext() + " | [" + yyline +", " + yycolumn + "]" );
 }

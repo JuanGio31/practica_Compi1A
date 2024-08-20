@@ -5,10 +5,10 @@ import com.mycompany.practica1compiladores.backend.symbol.Arbol;
 import com.mycompany.practica1compiladores.backend.symbol.TablaDeSimbolo;
 import com.mycompany.practica1compiladores.backend.symbol.Tipo;
 import com.mycompany.practica1compiladores.backend.symbol.TipoDeDato;
-import com.mycompany.practica1compiladores.backend.error.Error;
 import com.mycompany.practica1compiladores.backend.error.TipoError;
 import com.mycompany.practica1compiladores.backend.Ocurrencia;
 import com.mycompany.practica1compiladores.backend.analisis.Parser;
+import com.mycompany.practica1compiladores.backend.error.ErrorC;
 
 public class Aritmetico extends Instruccion {
     private Instruccion operando1;
@@ -56,7 +56,7 @@ public class Aritmetico extends Instruccion {
             case MULT -> this.multiplicacion(opIzq, opDer);
             case DIVISION -> this.division(opIzq, opDer);
             case NEGACION -> this.negacion(Unico);
-            default -> new Error(TipoError.SEMANTICO, "Operador invalido", getLinea(), getColumna());
+            default -> new ErrorC(TipoError.SEMANTICO, "Operador invalido", getLinea(), getColumna());
         };
     }
 
@@ -77,7 +77,7 @@ public class Aritmetico extends Instruccion {
             }
             default -> {
                 System.out.println("Negacion erronea");
-                return new Error(TipoError.SEMANTICO, "Negacion erronea", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Negacion erronea", getLinea(), getColumna());
             }
         }
     }
@@ -94,7 +94,7 @@ public class Aritmetico extends Instruccion {
         if (auxiliar == 0.0) {
             System.out.println("Division por cero");
             // return null;
-            return new Error(TipoError.SEMANTICO, "Division por cero", getLinea(),
+            return new ErrorC(TipoError.SEMANTICO, "Division por cero", getLinea(),
                     getColumna());
         }
 
@@ -114,7 +114,7 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) / Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Division erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Division erronea", getLinea(), getColumna());
                     }
                 }
             }
@@ -127,13 +127,13 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) / Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Division erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Division erronea", getLinea(), getColumna());
                     }
                 }
             }
 
             default -> {
-                return new Error(TipoError.SEMANTICO, "Division erronea", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Division erronea", getLinea(), getColumna());
             }
         }
     }
@@ -158,7 +158,7 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) * Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Multiplicacion erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Multiplicacion erronea", getLinea(), getColumna());
                     }
                 }
             }
@@ -171,13 +171,13 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) * Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Multiplicacion erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Multiplicacion erronea", getLinea(), getColumna());
                     }
                 }
             }
 
             default -> {
-                return new Error(TipoError.SEMANTICO, "Multiplicacion erronea", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Multiplicacion erronea", getLinea(), getColumna());
             }
         }
     }
@@ -202,7 +202,7 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Resta erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Resta erronea", getLinea(), getColumna());
                     }
                 }
             }
@@ -215,13 +215,13 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Resta erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Resta erronea", getLinea(), getColumna());
                     }
                 }
             }
 
             default -> {
-                return new Error(TipoError.SEMANTICO, "Resta erronea", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Resta erronea", getLinea(), getColumna());
             }
         }
     }
@@ -246,7 +246,7 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) + Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
                     }
                 }
             }
@@ -259,13 +259,13 @@ public class Aritmetico extends Instruccion {
                         return Double.parseDouble(opIzq.toString()) + Double.parseDouble(opDer.toString());
                     }
                     default -> {
-                        return new Error(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
+                        return new ErrorC(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
                     }
                 }
             }
 
             default -> {
-                return new Error(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
+                return new ErrorC(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
             }
         }
     }

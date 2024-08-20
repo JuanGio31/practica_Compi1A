@@ -3,6 +3,8 @@ package com.mycompany.practica1compiladores.backend.analisis;
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import com.mycompany.practica1compiladores.backend.instruccion.*;
+import com.mycompany.practica1compiladores.backend.error.ErrorC;
+import com.mycompany.practica1compiladores.backend.error.TipoError;
 import com.mycompany.practica1compiladores.backend.expresion.*;
 import com.mycompany.practica1compiladores.backend.symbol.*;
 import com.mycompany.practica1compiladores.view.figura.ColorEnum;
@@ -11,26 +13,26 @@ import com.mycompany.practica1compiladores.backend.Ocurrencia;
 class Parser;
 
 parser code {:
-    //public LinkedList<Errores> listaErrores = new LinkedList<>();
+    public LinkedList<ErrorC> listaError = new LinkedList<>();
     public static LinkedList<Ocurrencia> listaOc = new LinkedList<>();
 
 //TipoError tipo, String desc, int lineaa, int columaa
     public void syntax_error(Symbol s){
-        // listaErrores.add(new Errores(
-        //                 TipoError.SINTACTICO,
-        //                 ", Recuperable. No se esperaba el componente "+s.value,
-        //                 s.left,
-        //                 s.right));
-        System.out.println("Error Sintactico: " + s.value + " | ["+ s.left + ", " + s.right +" ]");
+         listaError.add(new ErrorC(
+                         TipoError.SINTACTICO,
+                         ", Recuperable. No se esperaba el componente "+s.value,
+                         s.left,
+                         s.right));
+        //System.out.println("Error Sintactico: " + s.value + " | ["+ s.left + ", " + s.right +" ]");
     }
 
     public void unrecovered_syntax_error (Symbol s){
-        // listaErrores.add(new Errores(
-        //                 TipoError.SINTACTICO,
-        //                 ", No Recuperable. No se esperaba el componente "+s.value,
-        //                 s.left,
-        //                 s.right));
-    System.out.println("Error Sintactico: " + s.value + " | ["+ s.left + ", " + s.right +" ]");
+         listaError.add(new ErrorC(
+                         TipoError.SINTACTICO,
+                         ", No Recuperable. No se esperaba el componente "+s.value,
+                         s.left,
+                         s.right));
+    //System.out.println("Error Sintactico: " + s.value + " | ["+ s.left + ", " + s.right +" ]");
     }
 :}
 

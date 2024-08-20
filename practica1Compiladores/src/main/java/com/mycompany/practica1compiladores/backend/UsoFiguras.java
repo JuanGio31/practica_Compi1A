@@ -2,7 +2,6 @@ package com.mycompany.practica1compiladores.backend;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import com.mycompany.practica1compiladores.view.figura.ColorEnum;
 
 public class UsoFiguras {

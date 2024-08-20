@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package com.mycompany.practica1compiladores.view;
 
-import com.formdev.flatlaf.FlatLightLaf;
+import com.mycompany.practica1compiladores.backend.error.ErrorC;
+import java.util.LinkedList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -12,13 +10,36 @@ import com.formdev.flatlaf.FlatLightLaf;
  */
 public class ReporteErrorD extends javax.swing.JDialog {
 
+    private LinkedList<ErrorC> err;
+
     /**
      * Creates new form ReporteErrorD
      */
-    public ReporteErrorD(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ReporteErrorD(java.awt.Frame parent, LinkedList<ErrorC> err) {
+        super(parent, true);
         setTitle("REPORTE DE ERRORES");
         initComponents();
+        this.err = err;
+        cargarTabla();
+    }
+
+    private void cargarTabla() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Tipo", "Linea", "Columna", "Descripcion"});
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        for (ErrorC errores : err) {
+            Object[] tmp = new Object[4];
+            tmp[0] = errores.getTipo();
+            tmp[1] = errores.getLinea();
+            tmp[2] = errores.getColumna();
+            tmp[3] = errores.getDescripcion();
+            modelo.addRow(tmp);
+        }
+        jTable1.setModel(modelo);
     }
 
     /**

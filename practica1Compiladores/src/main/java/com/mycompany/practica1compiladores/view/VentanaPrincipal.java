@@ -4,6 +4,7 @@ import com.itextpdf.text.DocumentException;
 import com.mycompany.practica1compiladores.backend.UsoFiguras;
 import com.mycompany.practica1compiladores.backend.analisis.Parser;
 import com.mycompany.practica1compiladores.backend.analisis.Scan;
+import com.mycompany.practica1compiladores.backend.error.ErrorC;
 import com.mycompany.practica1compiladores.backend.instruccion.Instruccion;
 import com.mycompany.practica1compiladores.backend.symbol.Arbol;
 import com.mycompany.practica1compiladores.backend.symbol.TablaDeSimbolo;
@@ -28,6 +29,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private final GestionTab gestionTab;
     private JPanel fileSave;
     private boolean hayError;
+    private LinkedList<ErrorC> errores;
 
     /**
      * Creates new form VentanaPrincipal
@@ -35,6 +37,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public VentanaPrincipal() {
         initComponents();
 
+        this.errores = new LinkedList<>();
         this.hayError = false;
         setLocationRelativeTo(null);
         this.control = new FilesControl();
@@ -190,6 +193,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (tab.getSelectedIndex() != -1) {
             hayError = false;
 
+            this.errores.clear();
             UsoFiguras.limpiar();
             int index = tab.getSelectedIndex();
             Tab temp = (Tab) tab.getComponentAt(index);
@@ -220,6 +224,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 var ast = new Arbol((LinkedList<Instruccion>) resultado.value);
                 var tabla = new TablaDeSimbolo();
                 tabla.setNombre("GLOBAL");
+                errores.addAll(scan.listaErrores);
+                errores.addAll(parser.listaError);
+                if (!errores.isEmpty()) {
+                    hayError = true;
+                }
 
                 for (var a : ast.getInstrucciones()) {
                     if (a == null) {
@@ -230,9 +239,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         figuras.add(f);
                     }
 
-                    if (res instanceof com.mycompany.practica1compiladores.backend.error.Error r) {
-                        //hayError = true;
-                        System.out.println(r.toString());
+                    if (res instanceof ErrorC r) {
+                        hayError = true;
+                        //System.out.println(r.toString());
+                        this.errores.add(r);
                     }
                 }
                 fr.add(lFiguras);
@@ -321,8 +331,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     private void btnReporteErrorActionPerformed(java.awt.event.ActionEvent evt) {
-        if (hayError) {
-            ReporteErrorD errorD = new ReporteErrorD(this, true);
+        if (hayError == true) {
+            ReporteErrorD errorD = new ReporteErrorD(this, errores);
             errorD.setLocationRelativeTo(null);
             errorD.setVisible(true);
         } else {
