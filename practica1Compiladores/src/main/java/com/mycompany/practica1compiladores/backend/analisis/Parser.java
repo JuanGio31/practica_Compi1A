@@ -11,6 +11,7 @@ import com.mycompany.practica1compiladores.backend.instruccion.*;
 import com.mycompany.practica1compiladores.backend.expresion.*;
 import com.mycompany.practica1compiladores.backend.symbol.*;
 import com.mycompany.practica1compiladores.view.figura.ColorEnum;
+import com.mycompany.practica1compiladores.backend.Ocurrencia;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -290,6 +291,7 @@ public class Parser extends java_cup.runtime.lr_parser {
 
 
     //public LinkedList<Errores> listaErrores = new LinkedList<>();
+    public static LinkedList<Ocurrencia> listaOc = new LinkedList<>();
 
 //TipoError tipo, String desc, int lineaa, int columaa
     public void syntax_error(Symbol s){
@@ -602,7 +604,7 @@ class CUP$Parser$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
 		Instruccion b = (Instruccion)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
-		  RESULT = new Aritmetico(a, b, OpAritmetic.SUMA, aleft, aright);    
+		  RESULT = new Aritmetico(a, b, OpAritmetic.SUMA, aleft, aright);     
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("EXPRESION",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

@@ -5,6 +5,8 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import com.mycompany.practica1compiladores.backend.UsoFiguras;
+
 /**
  * @author giovanic
  */
@@ -20,17 +22,18 @@ abstract public class Figura extends JPanel {
         this.posX = posX;
         this.posY = posY;
         this.color = color;
+        UsoFiguras.actualizarColor(color);
     }
 
     @Override
     public String toString() {
         return "Figura [nombre=" + nombre + ", posX=" + posX + ", posY=" + posY + ", color=" + color + "]";
     }
-//
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//    }
+    //
+    // @Override
+    // protected void paintComponent(Graphics g) {
+    // super.paintComponent(g);
+    // }
 
     public abstract void dibujar(Graphics g);
 

@@ -3,6 +3,7 @@ package com.mycompany.practica1compiladores.backend.instruccion;
 import java.util.Objects;
 import com.mycompany.practica1compiladores.backend.symbol.*;
 import com.mycompany.practica1compiladores.view.figura.*;
+import com.mycompany.practica1compiladores.backend.UsoFiguras;
 import com.mycompany.practica1compiladores.backend.error.Error;
 import com.mycompany.practica1compiladores.backend.error.TipoError;
 
@@ -141,6 +142,7 @@ public class GraficarF extends Instruccion {
     }
 
     private Object createF(Object id, Object posX, Object posY, Object lados, Object base, Object alto) {
+        UsoFiguras.actualizarObj("poligono");
         return new Poligono(String.valueOf(id),
                 getInt(posX),
                 getInt(posY),
@@ -152,6 +154,7 @@ public class GraficarF extends Instruccion {
 
     private Object createF(Object id, Object posX, Object posY, Object base, Object alto) {
         if (clase == FiguraEnum.RECTANGULO) {
+            UsoFiguras.actualizarObj("rectangulo");
             return new Rectangulo(String.valueOf(id),
                     getInt(posX),
                     getInt(posY),
@@ -159,6 +162,7 @@ public class GraficarF extends Instruccion {
                     getInt(alto),
                     color.getTipo());
         } else if (clase == FiguraEnum.LINEA) {
+            UsoFiguras.actualizarObj("linea");
             return new Linea(String.valueOf(id),
                     getInt(posX),
                     getInt(posY),
@@ -171,12 +175,14 @@ public class GraficarF extends Instruccion {
 
     private Object createF(Object id, Object posX, Object posY, Object lado) {
         if (clase == FiguraEnum.CIRCULO) {
+            UsoFiguras.actualizarObj("circulo");
             return new Circulo(String.valueOf(id),
                     getInt(posX),
                     getInt(posY),
                     getInt(lado),
                     color.getTipo());
         } else if (clase == FiguraEnum.CUADRADO) {
+            UsoFiguras.actualizarObj("cuadrado");
             return new Cuadrado(String.valueOf(id),
                     getInt(posX),
                     getInt(posY),

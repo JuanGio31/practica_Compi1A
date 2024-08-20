@@ -6,11 +6,13 @@ import com.mycompany.practica1compiladores.backend.instruccion.*;
 import com.mycompany.practica1compiladores.backend.expresion.*;
 import com.mycompany.practica1compiladores.backend.symbol.*;
 import com.mycompany.practica1compiladores.view.figura.ColorEnum;
+import com.mycompany.practica1compiladores.backend.Ocurrencia;
 
 class Parser;
 
 parser code {:
     //public LinkedList<Errores> listaErrores = new LinkedList<>();
+    public static LinkedList<Ocurrencia> listaOc = new LinkedList<>();
 
 //TipoError tipo, String desc, int lineaa, int columaa
     public void syntax_error(Symbol s){
@@ -96,7 +98,7 @@ ANI ::= ANIMAR OBJETO ANTERIOR LPAREN LINEA COMA EXPRESION COMA EXPRESION COMA E
 
 //Var(Tipo tipo, Object valor, int linea, int columna)
 EXPRESION ::= MENOS EXPRESION:a                 {:  RESULT = new Aritmetico(a, OpAritmetic.NEGACION, aleft, aright);    :}%prec UMENOS
-            | EXPRESION:a MAS EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.SUMA, aleft, aright);    :}
+            | EXPRESION:a MAS EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.SUMA, aleft, aright);     :}
             | EXPRESION:a MENOS EXPRESION:b     {:  RESULT = new Aritmetico(a, b, OpAritmetic.RESTA, aleft, aright);    :}
             | EXPRESION:a POR EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.MULT, aleft, aright);    :}
             | EXPRESION:a DIV EXPRESION:b       {:  RESULT = new Aritmetico(a, b, OpAritmetic.DIVISION, aleft, aright);    :}
@@ -117,9 +119,3 @@ COLORES ::= COL_AMARILLO    {:  RESULT = new TipoColor(ColorEnum.AMARILLO);     
           | COL_NEGRO       {:  RESULT = new TipoColor(ColorEnum.NEGRO);        :}          
 ;
 
-// FIGURAS ::= CIRCULO         {:  RESULT = new TipoFigura(FiguraEnum.CIRCULO);        :} 
-//           | CUADRADO        {:  RESULT = new TipoFigura(FiguraEnum.CUADRADO);       :} 
-//           | RECTANGULO      {:  RESULT = new TipoFigura(FiguraEnum.RECTANGULO);     :} 
-//           | LINEA           {:  RESULT = new TipoFigura(FiguraEnum.LINEA);          :} 
-//           | POLIGONO        {:  RESULT = new TipoFigura(FiguraEnum.POLIGONO);       :} 
-// ;

@@ -1,7 +1,6 @@
 package com.mycompany.practica1compiladores.view.figura;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Polygon;
 
 public class Poligono extends Figura {

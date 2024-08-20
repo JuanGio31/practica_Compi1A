@@ -1,5 +1,11 @@
 package com.mycompany.practica1compiladores.view;
 
+import com.mycompany.practica1compiladores.backend.UsoFiguras;
+import com.mycompany.practica1compiladores.backend.analisis.Parser;
+import com.mycompany.practica1compiladores.view.figura.ColorEnum;
+import java.util.Map;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author giovanic
@@ -9,10 +15,13 @@ public class ReporteD extends javax.swing.JDialog {
     /**
      * Creates new form ReporteD
      */
-    public ReporteD(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ReporteD(java.awt.Frame parent) {
+        super(parent, true);
         setTitle("REPORTE");
         initComponents();
+        cargarTablaOcurrencia();
+        cargarTablaColores();
+        cargarTablaObj();
     }
 
     /**
@@ -25,24 +34,24 @@ public class ReporteD extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ocurrencia = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        color = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        objeto = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ocurrencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +62,7 @@ public class ReporteD extends javax.swing.JDialog {
                 "Operador", "Linea", "Columna", "Ocurrencia"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ocurrencia);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -75,7 +84,7 @@ public class ReporteD extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jLabel3.setText("Reporte de colores usados");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        color.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Azul", null},
                 {"Rojo", null},
@@ -91,12 +100,12 @@ public class ReporteD extends javax.swing.JDialog {
                 "Color", "Cantidad de uso"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(color);
 
         jLabel4.setFont(new java.awt.Font("Roboto Medium", 0, 18)); // NOI18N
         jLabel4.setText("Reporte de objetos usados");
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        objeto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Circulo", null},
                 {"Cuadrado", null},
@@ -108,7 +117,7 @@ public class ReporteD extends javax.swing.JDialog {
                 "Objeto", "Cantidad de uso"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(objeto);
 
         jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -124,10 +133,8 @@ public class ReporteD extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +178,66 @@ public class ReporteD extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cargarTablaOcurrencia() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Operador", "Linea", "Columna", "Ocurrencia"});
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        for (int i = 0; i < Parser.listaOc.size(); i++) {
+            Object[] tmp = new Object[4];
+            tmp[0] = Parser.listaOc.get(i).getOperador();
+            tmp[1] = Parser.listaOc.get(i).getLinea();
+            tmp[2] = Parser.listaOc.get(i).getColumna();
+            tmp[3] = Parser.listaOc.get(i).getOcurrencia();
+            modelo.addRow(tmp);
+        }
+        ocurrencia.setModel(modelo);
+    }
+
+    private void cargarTablaColores() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Color", "Cantidad de Uso"});
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        for (Map.Entry<ColorEnum, Integer> entry : UsoFiguras.usoColores.entrySet()) {
+            Object[] tmp = new Object[2];
+            ColorEnum key = entry.getKey();
+            Integer value = entry.getValue();
+            tmp[0] = key;
+            tmp[1] = value;
+            modelo.addRow(tmp);
+        }
+        color.setModel(modelo);
+    }
+
+    private void cargarTablaObj() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.setColumnIdentifiers(new Object[]{"Objeto", "Cantidad de Uso"});
+
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+
+        for (Map.Entry<String, Integer> entry : UsoFiguras.usoObj.entrySet()) {
+            Object[] tmp = new Object[2];
+            String key = entry.getKey();
+            Integer value = entry.getValue();
+            tmp[0] = key;
+            tmp[1] = value;
+            modelo.addRow(tmp);
+        }
+        objeto.setModel(modelo);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable color;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -183,9 +249,8 @@ public class ReporteD extends javax.swing.JDialog {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
+    private javax.swing.JTable objeto;
+    private javax.swing.JTable ocurrencia;
     // End of variables declaration//GEN-END:variables
 }

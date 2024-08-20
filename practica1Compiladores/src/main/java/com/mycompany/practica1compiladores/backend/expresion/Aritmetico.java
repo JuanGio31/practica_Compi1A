@@ -7,6 +7,8 @@ import com.mycompany.practica1compiladores.backend.symbol.Tipo;
 import com.mycompany.practica1compiladores.backend.symbol.TipoDeDato;
 import com.mycompany.practica1compiladores.backend.error.Error;
 import com.mycompany.practica1compiladores.backend.error.TipoError;
+import com.mycompany.practica1compiladores.backend.Ocurrencia;
+import com.mycompany.practica1compiladores.backend.analisis.Parser;
 
 public class Aritmetico extends Instruccion {
     private Instruccion operando1;
@@ -63,10 +65,14 @@ public class Aritmetico extends Instruccion {
         switch (opU) {
             case ENTERO -> {
                 this.getTipo().setTipo(TipoDeDato.ENTERO);
+                Parser.listaOc.add(new Ocurrencia("RESTA", getLinea(), getColumna(),
+                        " - " + unico.toString()));
                 return (int) unico * -1;
             }
             case DECIMAL -> {
                 this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                Parser.listaOc.add(new Ocurrencia("RESTA", getLinea(), getColumna(),
+                        " - " + unico.toString()));
                 return (double) unico * -1;
             }
             default -> {
@@ -97,10 +103,14 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
+                        Parser.listaOc.add(new Ocurrencia("DIVISION", getLinea(), getColumna(),
+                                opIzq.toString() + " / " + opDer.toString()));
                         return Integer.parseInt(opIzq.toString()) / Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("DIVISION", getLinea(), getColumna(),
+                                opIzq.toString() + " / " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) / Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -112,6 +122,8 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("DIVISION", getLinea(), getColumna(),
+                                opIzq.toString() + " / " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) / Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -135,10 +147,14 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
+                        Parser.listaOc.add(new Ocurrencia("MULTIPLICACION", getLinea(), getColumna(),
+                                opIzq.toString() + " * " + opDer.toString()));
                         return Integer.parseInt(opIzq.toString()) * Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("MULTIPLICACION", getLinea(), getColumna(),
+                                opIzq.toString() + " * " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) * Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -150,6 +166,8 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("MULTIPLICACION", getLinea(), getColumna(),
+                                opIzq.toString() + " * " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) * Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -173,10 +191,14 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
+                        Parser.listaOc.add(new Ocurrencia("RESTA", getLinea(), getColumna(),
+                                opIzq.toString() + " - " + opDer.toString()));
                         return Integer.parseInt(opIzq.toString()) - Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("RESTA", getLinea(), getColumna(),
+                                opIzq.toString() + " - " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -188,6 +210,8 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("RESTA", getLinea(), getColumna(),
+                                opIzq.toString() + " - " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -211,10 +235,14 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO -> {
                         this.getTipo().setTipo(TipoDeDato.ENTERO);
+                        Parser.listaOc.add(new Ocurrencia("SUMA", getLinea(), getColumna(),
+                                opIzq.toString() + " + " + opDer.toString()));
                         return Integer.parseInt(opIzq.toString()) + Integer.parseInt(opDer.toString());
                     }
                     case DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
+                        Parser.listaOc.add(new Ocurrencia("SUMA", getLinea(), getColumna(),
+                                opIzq.toString() + " + " + opDer.toString()));
                         return Double.parseDouble(opIzq.toString()) + Double.parseDouble(opDer.toString());
                     }
                     default -> {
@@ -226,7 +254,9 @@ public class Aritmetico extends Instruccion {
                 switch (tipo2) {
                     case ENTERO, DECIMAL -> {
                         this.getTipo().setTipo(TipoDeDato.DECIMAL);
-                        return Double.parseDouble(opIzq.toString()) - Double.parseDouble(opDer.toString());
+                        Parser.listaOc.add(new Ocurrencia("SUMA", getLinea(), getColumna(),
+                                opIzq.toString() + " + " + opDer.toString()));
+                        return Double.parseDouble(opIzq.toString()) + Double.parseDouble(opDer.toString());
                     }
                     default -> {
                         return new Error(TipoError.SEMANTICO, "Suma erronea", getLinea(), getColumna());
